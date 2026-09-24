@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>用户留存分析模板 · EasyBI</title>
+<style>
+  :root{
+    --bg:#f4f6fb; --card:#ffffff; --ink:#0f1b3d; --ink-2:#5a6485; --ink-3:#9aa3bf;
+    --line:#e7ebf3; --brand:#4f7cff; --brand-2:#7a5cff; --teal:#00c2a8;
+    --amber:#ffa94d;
+    --shadow:0 6px 22px rgba(20,40,90,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1280px;margin:0 auto;padding:0 28px}
+
+  /* HERO */
+  .hero{background:linear-gradient(135deg,#3a63ff 0%,#6f4bff 60%,#9b5bff 100%);color:#fff;position:relative;overflow:hidden;padding:36px 0 56px}
+  .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(800px 400px at 80% -10%,rgba(255,255,255,.22),transparent 60%),radial-gradient(600px 300px at 10% 110%,rgba(255,255,255,.15),transparent 60%);pointer-events:none}
+  .hero-inner{position:relative;z-index:1}
+  .nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:42px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;letter-spacing:.5px}
+  .logo .dot{width:30px;height:30px;border-radius:8px;background:rgba(255,255,255,.18);display:grid;place-items:center;font-size:14px;backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.25)}
+  .nav-tags{display:flex;gap:8px}
+  .nav-tags span{font-size:12px;padding:5px 12px;border-radius:20px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.22)}
+  .badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.16);padding:6px 14px;border-radius:20px;font-size:12.5px;border:1px solid rgba(255,255,255,.25);margin-bottom:20px}
+  .badge .pulse{width:7px;height:7px;border-radius:50%;background:#7dffb2;box-shadow:0 0 0 0 rgba(125,255,178,.7);animation:pulse 1.8s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(125,255,178,.6)}70%{box-shadow:0 0 0 10px rgba(125,255,178,0)}100%{box-shadow:0 0 0 0 rgba(125,255,178,0)}}
+  h1.title{font-size:46px;font-weight:800;letter-spacing:-1px;margin-bottom:14px;line-height:1.15}
+  h1.title .em{background:linear-gradient(90deg,#ffd83d,#ff9d3d);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .subtitle{font-size:17px;max-width:780px;color:rgba(255,255,255,.92);margin-bottom:28px}
+  .btn-row{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:10px;font-weight:600;font-size:15px;cursor:pointer;border:0;transition:transform .2s,box-shadow .2s}
+  .btn-primary{background:#fff;color:#3a63ff;box-shadow:0 12px 30px rgba(0,0,0,.18)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(0,0,0,.25)}
+  .btn-ghost{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.35);backdrop-filter:blur(10px)}
+  .btn-ghost:hover{background:rgba(255,255,255,.22)}
+  .btn-lg{padding:16px 36px;font-size:16px}
+
+  /* SECTIONS */
+  section{padding:64px 0}
+  .sec-head{margin-bottom:34px}
+  .sec-tag{font-size:12.5px;color:var(--brand);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+  .sec-title{font-size:32px;font-weight:800;letter-spacing:-.5px;margin-bottom:10px}
+  .sec-desc{color:var(--ink-2);font-size:15px;max-width:880px}
+
+  /* 介绍 */
+  .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .feat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:28px 26px;box-shadow:var(--shadow);transition:transform .25s,box-shadow .25s}
+  .feat:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(20,40,90,.13)}
+  .feat .icon{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;font-size:22px;margin-bottom:16px;font-weight:700}
+  .feat h3{font-size:18px;font-weight:700;margin-bottom:10px}
+  .feat p{color:var(--ink-2);font-size:14.5px}
+  .f1 .icon{background:#eaf0ff;color:#4f7cff}
+  .f2 .icon{background:#eaf0ff;color:#7a5cff}
+  .f3 .icon{background:#eaf0ff;color:#00c5a4}
+
+  /* 适用用户 */
+  .audience-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .audience{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 22px 20px;box-shadow:var(--shadow);transition:transform .25s,box-shadow .25s;position:relative;overflow:hidden}
+  .audience:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(20,40,90,.13)}
+  .audience::before{content:"";position:absolute;left:0;top:0;width:4px;height:100%;background:var(--brand)}
+  .audience.a2::before{background:var(--brand-2)}
+  .audience.a3::before{background:var(--teal)}
+  .audience.a4::before{background:var(--amber)}
+  .audience .role{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:var(--brand);font-weight:600;background:#eaf0ff;padding:4px 10px;border-radius:6px;margin-bottom:14px}
+  .audience.a2 .role{color:var(--brand-2);background:#f1ecff}
+  .audience.a3 .role{color:var(--teal);background:#e7faf6}
+  .audience.a4 .role{color:var(--amber);background:#fff3e6}
+  .audience h4{font-size:15.5px;font-weight:700;margin-bottom:8px}
+  .audience p{font-size:13.5px;color:var(--ink-2)}
+
+  /* Responsive */
+  @media (max-width:1080px){
+    .feat-grid,.audience-grid{grid-template-columns:repeat(2,1fr)}
+    h1.title{font-size:36px}
+  }
+  @media (max-width:640px){
+    .audience-grid{grid-template-columns:1fr}
+    h1.title{font-size:30px}
+    section{padding:44px 0}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap hero-inner">
+    <nav class="nav">
+      <div class="logo"><span class="dot">E</span> EasyBI</div>
+      <div class="nav-tags">
+        <span>用户增长</span><span>留存分析</span><span>运营决策</span>
+      </div>
+    </nav>
+
+    <div class="badge"><span class="pulse"></span> 行业通用模板 · 一键即可复用到 EasyBI 工作区</div>
+
+    <h1 class="title">用户留存分析模板<br><span class="em">看透用户"回不回来"</span></h1>
+    <p class="subtitle">基于"注册日 × 活跃日"构建留存矩阵，从渠道、生命周期、用户画像三大视角拆解次日至 60 日留存。帮助运营快速定位流失节点、识别高质量用户、量化促活 ROI——5 分钟看清哪些用户在留下来，哪些在悄悄溜走。</p>
+
+    <div class="btn-row">
+      <a class="btn btn-primary btn-lg" href="https://easybi.jd.com/preview/1785968?system=bi-new" target="_blank" rel="noopener">一键应用模板 →</a>
+      <a class="btn btn-ghost btn-lg" href="#dashboard">跳转查看效果 ↓</a>
+    </div>
+  </div>
+</header>
+
+<section id="intro">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-tag">TEMPLATE OVERVIEW</div>
+      <h2 class="sec-title">这个模板解决什么问题</h2>
+      <p class="sec-desc">把用户从注册到流失的路径，切成一张可对比的留存矩阵——按时间和渠道两个维度，5 分钟看清哪些用户在留下来，哪些在悄悄溜走。</p>
+    </div>
+
+    <div class="feat-grid">
+      <div class="feat f1">
+        <div class="icon">①</div>
+        <h3>全生命周期留存</h3>
+        <p>覆盖次日 / 3 / 7 / 14 / 30 / 60 日等关键节点，一眼看到 D1→D7→D30 哪段掉得最快。</p>
+      </div>
+      <div class="feat f2">
+        <div class="icon">②</div>
+        <h3>渠道质量对比</h3>
+        <p>按渠道拆分留存曲线，识别"花钱买来的用户"和"自然增长的用户"差异。</p>
+      </div>
+      <div class="feat f3">
+        <div class="icon">③</div>
+        <h3>画像 × 留存交叉</h3>
+        <p>结合性别、年龄、省份、会员等级，定位高价值且高留存的核心人群。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="audience" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-tag">WHO IT'S FOR</div>
+      <h2 class="sec-title">适用用户</h2>
+      <p class="sec-desc">四类岗位都能直接从留存矩阵里拿到想要的那一屏答案。</p>
+    </div>
+
+    <div class="audience-grid">
+      <div class="audience a1">
+        <span class="role">📊 增长团队</span>
+        <h4>评估渠道真实 ROI</h4>
+        <p>不再只看 CPA，把留存率叠加进渠道评价，识别"均价便宜但留不住"的劣质流量。</p>
+      </div>
+      <div class="audience a2">
+        <span class="role">🎯 运营团队</span>
+        <h4>定位流失关键节点</h4>
+        <p>从 D1→D7、D7→D30 的衰减速率，找到"用完即走"还是"中长期沉默"的拐点。</p>
+      </div>
+      <div class="audience a3">
+        <span class="role">🛠 产品团队</span>
+        <h4>验证新功能效果</h4>
+        <p>对比功能上线前后注册批次的留存曲线，直观看到新版本是否真的提升了粘性。</p>
+      </div>
+      <div class="audience a4">
+        <span class="role">💼 管理层</span>
+        <h4>把控用户基本盘</h4>
+        <p>用一张矩阵看清 6 个月用户留存全貌，为预算、目标、KPI 设定提供量化依据。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="dashboard" style="padding-top:20px;padding-bottom:0">
+  <div class="wrap">
+    <div class="sec-head" style="margin-bottom:20px">
+      <div class="sec-tag">DASHBOARD PREVIEW</div>
+      <h2 class="sec-title">看板效果预览</h2>
+      <p class="sec-desc">基于本模板搭建的真实 EasyBI 看板效果如下。</p>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
