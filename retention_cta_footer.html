@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>用户留存分析模板 · 底部 CTA</title>
+<style>
+  :root{
+    --brand:#3a63ff; --brand-2:#7a5cff;
+    --shadow-lg:0 18px 50px rgba(20,40,90,.14);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#f4f6fb;color:#0f1b3d;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1280px;margin:0 auto;padding:0 28px}
+  section{padding:40px 0 60px}
+  .cta-final{background:linear-gradient(135deg,#3a63ff,#7a5cff);color:#fff;border-radius:22px;padding:54px 48px;text-align:center;position:relative;overflow:hidden;box-shadow:var(--shadow-lg)}
+  .cta-final::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 250px at 50% -50%,rgba(255,255,255,.22),transparent 60%);pointer-events:none}
+  .cta-final h2{font-size:32px;font-weight:800;margin-bottom:12px;position:relative}
+  .cta-final p{color:rgba(255,255,255,.92);font-size:15.5px;margin-bottom:26px;position:relative}
+  .btn-row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;position:relative}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:10px;font-weight:600;font-size:15px;cursor:pointer;border:0;transition:transform .2s,box-shadow .2s}
+  .btn-primary{background:#fff;color:#3a63ff;box-shadow:0 12px 30px rgba(0,0,0,.18)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(0,0,0,.25)}
+  .btn-lg{padding:16px 36px;font-size:16px}
+  @media (max-width:640px){
+    .cta-final{padding:36px 22px}
+    .cta-final h2{font-size:24px}
+  }
+</style>
+</head>
+<body>
+<section>
+  <div class="wrap">
+    <div class="cta-final">
+      <h2>立即在你的数据上跑起来</h2>
+      <p>一键应用模板到 EasyBI 工作区，绑定你的数据集即可复用全部图表</p>
+      <div class="btn-row">
+        <a class="btn btn-primary btn-lg" href="https://easybi.jd.com/preview/1785968?system=bi-new" target="_blank" rel="noopener">一键应用模板 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>
