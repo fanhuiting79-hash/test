@@ -31,7 +31,7 @@
   .reveal{opacity:0;transform:translateY(32px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
   .reveal.in{opacity:1;transform:none}
   .reveal-d1{transition-delay:.1s}.reveal-d2{transition-delay:.2s}.reveal-d3{transition-delay:.3s}.reveal-d4{transition-delay:.4s}
-  .hero{position:relative;padding:40px 0 60px}
+  .hero{position:relative;padding:40px 0 0}
   .hero-bg{position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:1100px;height:520px;
     background:radial-gradient(550px 280px at 28% 25%,rgba(79,124,255,.14),transparent 60%),radial-gradient(450px 260px at 72% 30%,rgba(122,92,255,.14),transparent 60%),radial-gradient(380px 240px at 50% 85%,rgba(0,194,168,.08),transparent 60%);
     filter:blur(50px);z-index:0;pointer-events:none;}
@@ -93,7 +93,7 @@
   .audience.a4::before{background:linear-gradient(90deg,#ffa94d,#ff7ab8)}
   .audience:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg);border-color:var(--line-2)}
   .audience:hover::before{transform:scaleX(1)}
-  .audience .role{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;padding:6px 12px;border-radius:9px;margin-bottom:18px;}
+  .audience .role{display:inline-flex;align-items:center;gap:7px;font-size:16px;font-weight:800;padding:6px 12px;border-radius:9px;margin-bottom:14px;margin-left:-6px;}
   .audience.a1 .role{color:var(--brand);background:#eaf0ff}
   .audience.a2 .role{color:var(--brand-2);background:#f1ecff}
   .audience.a3 .role{color:#00a88a;background:#e7faf6}
@@ -111,11 +111,22 @@
   <div class="wrap hero-inner">
     <nav class="nav">
       <div class="logo"><span class="dot">E</span> EasyBI</div>
-      <div class="nav-tags"><span>用户增长</span><span>留存分析</span><span>运营决策</span></div>
+      <div class="nav-tags">
+        <span style="cursor:pointer" onclick="document.getElementById('intro').scrollIntoView({behavior:'smooth',block:'start'})">解决什么</span>
+        <span style="cursor:pointer" onclick="document.getElementById('audience').scrollIntoView({behavior:'smooth',block:'start'})">适用用户</span>
+        <span style="cursor:pointer" onclick="document.getElementById('dashboard').scrollIntoView({behavior:'smooth',block:'start'})">效果预览</span>
+      </div>
     </nav>
     <div class="badge reveal in"><span class="pulse"></span> 行业通用模板 · 一键即可复用到 EasyBI 工作区</div>
-    <h1 class="title reveal in">用户留存分析模板<br><span class="em">看透用户"回不回来"</span></h1>
-    <p class="subtitle reveal in">基于"注册日 × 活跃日"构建留存矩阵，从渠道、生命周期、用户画像三大视角拆解次日至 60 日留存。帮助运营快速定位流失节点、识别高质量用户、量化促活 ROI——5 分钟看清哪些用户在留下来，哪些在悄悄溜走。</p>
+    <div style="display:flex;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:20px" class="reveal in">
+      <h1 class="title" style="margin-bottom:0">用户留存分析模板<br><span class="em">看透用户"回不回来"</span></h1>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;padding-bottom:12px">
+        <span style="font-size:12.5px;padding:6px 14px;border-radius:20px;background:rgba(255,255,255,.75);color:var(--brand);border:1px solid rgba(79,124,255,.15);backdrop-filter:blur(8px);box-shadow:0 2px 8px rgba(79,124,255,.06)">用户增长</span>
+        <span style="font-size:12.5px;padding:6px 14px;border-radius:20px;background:rgba(255,255,255,.75);color:var(--brand-2);border:1px solid rgba(122,92,255,.15);backdrop-filter:blur(8px);box-shadow:0 2px 8px rgba(122,92,255,.06)">留存分析</span>
+        <span style="font-size:12.5px;padding:6px 14px;border-radius:20px;background:rgba(255,255,255,.75);color:#00a88a;border:1px solid rgba(0,168,138,.15);backdrop-filter:blur(8px);box-shadow:0 2px 8px rgba(0,168,138,.06)">运营决策</span>
+      </div>
+    </div>
+    <p class="subtitle reveal in">用户整体留得怎么样？哪个渠道来的用户更愿意回来？哪些功能、哪些人群更有粘性？<br>从渠道、生命周期、用户画像三大视角拆解次日至 30 日留存。5 分钟看清哪些用户在留下来，哪些在悄悄溜走。助你快速定位流失节点、识别高质量人群、量化促活 ROI！</p>
     <div class="btn-row reveal in">
       <a class="btn btn-primary btn-lg" href="https://easybi.jd.com/preview/1785968?system=bi-new" target="_blank" rel="noopener">一键应用模板 →</a>
       <a class="btn btn-ghost btn-lg" href="javascript:document.getElementById('dashboard').scrollIntoView({behavior:'smooth',block:'start'});">跳转查看效果 ↓</a>
@@ -127,13 +138,12 @@
     <div class="sec-head reveal">
       <div class="sec-tag">TEMPLATE OVERVIEW</div>
       <h2 class="sec-title">这个模板解决什么问题</h2>
-      <p class="sec-desc">把用户从注册到流失的路径，切成一张可对比的留存矩阵——按时间和渠道两个维度，5 分钟看清哪些用户在留下来，哪些在悄悄溜走。</p>
     </div>
     <div class="feat-grid">
       <div class="feat f1 reveal reveal-d1">
         <div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M3 3v18h18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M7 14l4-4 3 3 5-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <h3>全生命周期留存</h3>
-        <p>覆盖次日 / 3 / 7 / 14 / 30 / 60 日等关键节点，一眼看到 D1→D7→D30 哪段掉得最快。</p>
+        <p>覆盖次日 / 3 / 7 / 30 关键节点，一眼看到 D1→D7→D30 哪段掉得最快。</p>
       </div>
       <div class="feat f2 reveal reveal-d2">
         <div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 019 9h-9V3z" fill="currentColor" opacity=".5"/></svg></div>
@@ -148,7 +158,7 @@
     </div>
   </div>
 </section>
-<section id="audience" style="padding-top:0">
+<section id="audience" style="padding-top:0;padding-bottom:0">
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="sec-tag">WHO IT'S FOR</div>
@@ -157,7 +167,7 @@
     </div>
     <div class="audience-grid">
       <div class="audience a1 reveal reveal-d1">
-        <span class="role">📊 增长团队</span>
+        <span class="role">📊 分析师</span>
         <h4>评估渠道真实 ROI</h4>
         <p>不再只看 CPA，把留存率叠加进渠道评价，识别"均价便宜但留不住"的劣质流量。</p>
       </div>
